@@ -1,4 +1,4 @@
-# Script com Selenium para resgatar estatisticas de partidas de 7 Wonders dos melhores jogadores do BGA
+# Script using Selenium to retrieve 7 Wonders' match stats from top ranked BGA players
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -6,39 +6,39 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC 
 import time
 
-# conta premium
-USERNAME = 'Mineradores'
-PASSWORD = 'dmag1204b'
+# Premium account
+USERNAME = 'username'
+PASSWORD = 'password'
 
-# rank do jogador a ser buscada as partidas (do top 10)
+# player rank (top 10)
 RANK = 1
-# buscar partidas de um jogador especifico (deixar 0 para buscar a partir do rank aqui de cima)
+# player id (keep 0 to use player rank)
 USER_ID = 0
-# minimo aceito de media de pontos dos jogadores da partida
-PLAYERS_AVERAGE_LEVEL_MIN = 300
-# quantia de partidas buscadas por numero de jogadores
+# minimum players average level accept
+PLAYERS_AVERAGE_LEVEL_MIN = 350
+# amount of matches to be taken according to number of players
 PLAYERS = {
-    3 : 0,
-    4 : 0,
-    5 : 0,
-    6 : 176,
-    7 : 112
+    3 : 500,
+    4 : 500,
+    5 : 500,
+    6 : 500,
+    7 : 500
 }
-# Webdriver em https://sites.google.com/a/chromium.org/chromedriver/downloads
+# download: https://sites.google.com/a/chromium.org/chromedriver/downloads
 WEBDRIVER_PATH = 'C:\\Users\\rvales\\Downloads\\chromedriver_win32\\chromedriver.exe'
 
 def main():
     browser = webdriver.Chrome(WEBDRIVER_PATH)
     wait = WebDriverWait(browser, 10)
 
-    # Acessa e efetua login no site
+    # Log in
     LOGIN_URL = 'https://boardgamearena.com/account'
     browser.get(LOGIN_URL)
     wait.until(EC.presence_of_element_located((By.ID, 'username_input'))).send_keys(USERNAME)
     wait.until(EC.presence_of_element_located((By.ID, 'password_input'))).send_keys(PASSWORD)
     wait.until(EC.element_to_be_clickable((By.ID, 'login_button'))).click()
 
-    # Acessa o ranking e busca o id do jogador que sera buscada as partidas
+    # Go to the rank page and search for the player id that will be caught in the matches.
     RANKING_URL = 'https://boardgamearena.com/gamepanel?game=sevenwonders&section=rankings'
     browser.get(RANKING_URL)
     browser.get(RANKING_URL)
@@ -50,13 +50,13 @@ def main():
     else:
         player_id = str(USER_ID)
 
-    # Aessa as partidas de 7 Wonders do jogador
+    # Go to player's 7 Wonders matches
     RESULTS_URL = 'https://boardgamearena.com/gamestats?player=' + player_id + '&opponent_id=0&game_id=1131&finished=1'
     browser.get(RESULTS_URL)
 
     input('\nClick on \'See more\' and load as many matches to save, then press Enter to continue.\n')
 
-    # Resgata o id das partidas e armazena na lista games_id
+    # Get matches ids and store to list games_id
     print('Saving match IDs...')
     games = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@class="statstable"]'))).find_elements_by_class_name('smalltext')
     games_id = []
@@ -65,8 +65,8 @@ def main():
             games_id.append(g.text[1:])
     total = len(games_id)
 
-    # Cria uma lista das partidas ja registradas em outras execucoes a partir de matches_saved.txt para nao repeti-las
-    open('matches_saved.txt', 'a').close() # cria o arquivo caso nao exista ainda
+    # Stores a list of matches already taken in other runs from matches_saved.txt so as not to repeat them
+    open('matches_saved.txt', 'a').close() # create the file if it does not exist yet
     f = open('matches_saved.txt', 'r')
     matches_already_taken = []
     aux = f.readlines()
@@ -74,53 +74,53 @@ def main():
         matches_already_taken.append(a[0:-1])
     f.close()
 
-    # Abre arquivo para escrever as partidas que vao sendo pegas nessa execucao
+    # Open file to write the matches that are being picked up in this run
     f = open('matches_saved.txt', 'a')
 
-    # Para cada partida, acessa a pagina dela e...
+    # For each match, go to page and...
     print('Acessing ' + str(total) + ' matches:')
 
-    for i in range(0, total):
+    for i in range(375, total):
         browser.get('https://boardgamearena.com/table?table=' + games_id[i])
 
-        # Verifica se esta sendo buscada partidas com essa quantidade de jogadores
+        # Check if you need this number of players
         wait.until(EC.presence_of_element_located((By.XPATH, '//*[@class="rank"]')))
         number_players = len(browser.find_elements_by_class_name('rank'))
         if PLAYERS[number_players] <= 0:
             print('[' + str(i+1) + '/' + str(total) + '] Match #' + games_id[i] + ' ignored. ' + str(number_players) + ' player matches are not being sought.')
             continue
 
-        # Verifica se o nivel dos jogadores da partida esta acima do minimo definido
+        # Checks if the players' level is above the minimum
         game_stats = wait.until(EC.presence_of_element_located((By.ID, 'table_stats')))
         average_level = int(wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="table_stats"]/*/*/*/*[@class="gamerank_value"]'))).text)
         if average_level < PLAYERS_AVERAGE_LEVEL_MIN:
             print('[' + str(i+1) + '/' + str(total) + '] Match #' + games_id[i] + ' ignored. Average player level: ' + str(average_level) + ' (min ' + str(PLAYERS_AVERAGE_LEVEL_MIN) + ')')
             continue
 
-        # Verifica se a partida ja foi salva em uma execucao anterior
+        # Checks if the match has already been saved in a previous run
         if games_id[i] in matches_already_taken:
             print('[' + str(i+1) + '/' + str(total) + '] Match #' + games_id[i] + ' has already been saved.')
             continue
 
 
-        # Pega a tabela de estatisticas da partida
+        # Get the match stats table
         data = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
         table = wait.until(EC.presence_of_element_located((By.ID, 'player_stats_table')))
         table_rows = table.find_elements_by_xpath('//tr')
         for j in range(1, 26):
             v = table_rows[j].find_elements_by_xpath('td')
-            # Insere o dado de cada jogador na lista para posteriormente ir ao csv
+            # Add the data of each player in the list
             data[j-1].append('')
             for k in range(0, number_players):
                 data[j-1].append(v[k].text)
 
-        # Escreve no arquivo
+        # Write to file...
         FILE_NAME = '7wonders_' + str(number_players) + '.csv'
 
         ff = open(FILE_NAME, 'a')
-        # y = cada jogador de cada partida
+        # y = each player of each match
         for y in range(0, len(data[0])):
-            # x = cada stat (game result, thinking time, vp from.., etc)
+            # x = each stat (game result, thinking time, vp from.., ...)
             for x in range(0, 25):
                 ff.write(data[x][y])
                 if x != 24:
