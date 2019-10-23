@@ -120,3 +120,32 @@ fitPlotVP(df7,
 # Continue with other classifications and see which results are interesting.
 # (in case you're wondering, I did merge all the data into a single dataframe earlier,
 #  but the results were pretty garbage in general, as expected)
+
+# Classification based on place and quantity of military structures
+fitPlot(df3, df3$Place, df3$Military.Structures, "Classification | y = Place, x = Military Structures(3 PLAYERS)")
+fitPlot(df4, df4$Place, df4$Military.Structures, "Classification | y = Place, x = Military Structures(4 PLAYERS)")
+fitPlot(df5, df5$Place, df5$Military.Structures, "Classification | y = Place, x = Military Structures(5 PLAYERS)")
+fitPlot(df6, df6$Place, df6$Military.Structures, "Classification | y = Place, x = Military Structures(6 PLAYERS)")
+fitPlot(df7, df7$Place, df7$Military.Structures, "Classification | y = Place, x = Military Structures(7 PLAYERS)")
+
+# Classification based on place and quantity of scientific structures
+fitPlot(df3, df3$Place, df3$Scientific.Structures, "Classification | y = Place, x = Scientific Structures(3 PLAYERS)")
+fitPlot(df4, df4$Place, df4$Scientific.Structures, "Classification | y = Place, x = Scientific Structures(4 PLAYERS)")
+fitPlot(df5, df5$Place, df5$Scientific.Structures, "Classification | y = Place, x = Scientific Structures(5 PLAYERS)")
+fitPlot(df6, df6$Place, df6$Scientific.Structures, "Classification | y = Place, x = Scientific Structures(6 PLAYERS)")
+fitPlot(df7, df7$Place, df7$Scientific.Structures, "Classification | y = Place, x = Scientific Structures(7 PLAYERS)")
+
+# Classification based on place and coins spent on commerce 
+fitPlot(df3, df3$Place, df3$Coins.spent.on.commerce, "Classification | y = Place, x = Coins spent on commerce(3 PLAYERS)")
+fitPlot(df4, df4$Place, df4$Coins.spent.on.commerce, "Classification | y = Place, x = Coins spent on commerce(4 PLAYERS)")
+fitPlot(df5, df5$Place, df5$Coins.spent.on.commerce, "Classification | y = Place, x = Coins spent on commerce(5 PLAYERS)")
+fitPlot(df6, df6$Place, df6$Coins.spent.on.commerce, "Classification | y = Place, x = Coins spent on commerce(6 PLAYERS)")
+fitPlot(df7, df7$Place, df7$Coins.spent.on.commerce, "Classification | y = Place, x = Coins spent on commerce(7 PLAYERS)")
+
+# Classification based on place and commercial structures
+fitPlot(df3, df3$Place, df3$Commercial.Structures, "Classification | y = Place, x = Commercial Structures(3 PLAYERS)")
+fitPlot(df4, df4$Place, df4$Commercial.Structures, "Classification | y = Place, x = Commercial Structures(4 PLAYERS)")
+fitPlot(df5, df5$Place, df5$Commercial.Structures, "Classification | y = Place, x = Commercial Structures(5 PLAYERS)")
+fitPlot(df6, df6$Place, df6$Commercial.Structures, "Classification | y = Place, x = Commercial Structures(6 PLAYERS)")
+fitPlot(df7, df7$Place, df7$Commercial.Structures, "Classification | y = Place, x = Commercial Structures(7 PLAYERS)")
+
