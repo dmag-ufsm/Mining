@@ -12,6 +12,27 @@ df5 <- na.omit(read.csv("../datasets/7wonders_5.csv"))
 df6 <- na.omit(read.csv("../datasets/7wonders_6.csv"))
 df7 <- na.omit(read.csv("../datasets/7wonders_7.csv"))
 
+# The data has a certain order (placement), so we'll need to "shuffle" the dataframes
+# so it'll be representative of the actual population.
+# (thankfully the result didn't change for the images as of 2019-11-05; 
+# however, it's good practice)
+set.seed(123)
+
+g <- runif(nrow(df3))
+df3 <- df3[order(g),]
+
+g <- runif(nrow(df4))
+df4 <- df4[order(g),]
+
+g <- runif(nrow(df5))
+df5 <- df5[order(g),]
+
+g <- runif(nrow(df6))
+df6 <- df6[order(g),]
+
+g <- runif(nrow(df7))
+df7 <- df7[order(g),]
+
 fitPlot <- function(df, y, x, label) {
   # method="class" for a classification tree
   # method="anova" for a regression tree
@@ -68,8 +89,6 @@ fitPlot <- function(df, y, x, label) {
 # Didn't work. Probably need to change some rpart settings?
 
 fitPlotVP <- function(df, y, wonder, conflict.victory, civil, comm, guild, sci, treasury, label) {
-  # method="class" for a classification tree
-  # method="anova" for a regression tree
   fit <- rpart(y ~ wonder+conflict.victory+civil+comm+guild+sci+treasury, method="class", data=df)
   rpart.plot(fit, main=label, branch.lty=3, shadow.col="gray")
 }
