@@ -2,11 +2,11 @@
 ## Resultados da classificação x Regras de associação/Estatísticas
 
 ### 1. Quantidade de escudos
-![](images/ctree_shields_3p.png){:height="50%" width="50%"}
-![](images/ctree_shields_4p.png){:height="50%" width="50%"}
-![](images/ctree_shields_5p.png){:height="50%" width="50%"}
-![](images/ctree_shields_6p.png){:height="50%" width="50%"}
-![](images/ctree_shields_7p.png){:height="50%" width="50%"}
+![](images/ctree_shields_3p.png | width=400)
+![](images/ctree_shields_4p.png)
+![](images/ctree_shields_5p.png)
+![](images/ctree_shields_6p.png)
+![](images/ctree_shields_7p.png)
 
 A maior parte dos jogadores vencedores costuma terminar o jogo com
 uma boa quantidade de escudos; tipicamente um número maior de 5 e 
