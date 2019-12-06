@@ -25,18 +25,18 @@ Tipicamente, o vencedor termina tipicamente com 1 bem manufaturado, o que
 vai ao encontro das estatísticas encontradas.
 
 ### 3. Quantidade de cartas descartadas
-<img src="images/ctree_cards_discarded_3p.png" width="400"> <img src="images/ctree_cards_discarded_4p.png" width="400">
-<img src="images/ctree_cards_discarded_5p.png" width="400"> <img src="images/ctree_cards_discarded_6p.png" width="400">
-<img src="images/ctree_cards_discarded_7p.png" width="400">
+<img src="images/ctree_cards_discarded_3p.png" width="420"> <img src="images/ctree_cards_discarded_4p.png" width="420">
+<img src="images/ctree_cards_discarded_5p.png" width="420"> <img src="images/ctree_cards_discarded_6p.png" width="420">
+<img src="images/ctree_cards_discarded_7p.png" width="420">
 
 Jogadores vencedores não descartam cartas em troca de moedas, o que também
 vai ao encontro das estatísticas encontradas. Quando há descarte, tipicamente
 é de apenas 1 carta entre os vencedores.
 
 ### 4. Pontos de vitória
-<img src="images/ctree_combined_vp_3p.png" width="450"> <img src="images/ctree_combined_vp_4p.png" width="450">
-<img src="images/ctree_combined_vp_5p.png" width="450"> <img src="images/ctree_combined_vp_6p.png" width="450">
-<img src="images/ctree_combined_vp_7p.png" width="450">
+<img src="images/ctree_combined_vp_3p.png" width="600"> <img src="images/ctree_combined_vp_4p.png" width="600">
+<img src="images/ctree_combined_vp_5p.png" width="600"> <img src="images/ctree_combined_vp_6p.png" width="600">
+<img src="images/ctree_combined_vp_7p.png" width="600">
 
 Com as regras de associação anteriormente calculadas, os resultados de
 classificação apenas corroboram com o que foi encontrado (juntamente com 
