@@ -80,6 +80,12 @@ fitPlot <- function(df, df_test, y, x, label) {
 # Conclusion:
 # Players that don't spend many coins tend to score better (< 7 players)
 
+# PLACE ~ DISCARDED CARDS
+#fitPlot(df3, df3_test, df3$Place, df3$Cards.discarded, "Classification by x = Cards discarded: 3 players")
+#fitPlot(df4, df4_test, df4$Place, df4$Cards.discarded, "Classification by x = Cards discarded: 4 players")
+#fitPlot(df5, df5_test, df5$Place, df5$Cards.discarded, "Classification by x = Cards discarded: 5 players")
+#fitPlot(df6, df6_test, df6$Place, df6$Cards.discarded, "Classification by x = Cards discarded: 6 players")
+#fitPlot(df7, df7_test, df7$Place, df7$Cards.discarded, "Classification by x = Cards discarded: 7 players")
 
 # PLACE ~ WONDER VP
 #fitPlot(df3, df3_test, df3$Place, df3$VP.from.Wonder, "Classification by x = VP Wonder: 3 players")
@@ -104,6 +110,7 @@ fitPlot <- function(df, df_test, y, x, label) {
 #fitPlot(df5, df5_test, df5$Place, df5$Manufactured.Goods, "Classification by x = Manufactured Goods: 5 players")
 #fitPlot(df6, df6_test, df6$Place, df6$Manufactured.Goods, "Classification by x = Manufactured Goods: 6 players")
 #fitPlot(df7, df7_test, df7$Place, df7$Manufactured.Goods, "Classification by x = Manufactured Goods: 7 players")
+
 
 fitPlotVP <- function(df, df_test, y, wonder, conflict.victory, civil, comm, guild, sci, treasury, label) {
   fit <- rpart(y ~ wonder+conflict.victory+civil+comm+guild+sci+treasury, method="class", data=df)
