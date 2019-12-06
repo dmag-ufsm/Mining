@@ -2,9 +2,9 @@
 ## Resultados da classificação x Regras de associação/Estatísticas
 
 ### 1. Quantidade de escudos
-<img src="images/ctree_shields_3p.png" width="400"> <img src="images/ctree_shields_4p.png" width="400">
-<img src="images/ctree_shields_5p.png" width="400"> <img src="images/ctree_shields_6p.png" width="400">
-<img src="images/ctree_shields_7p.png" width="400">
+<img src="images/ctree_shields_3p.png" width="430"> <img src="images/ctree_shields_4p.png" width="430">
+<img src="images/ctree_shields_5p.png" width="430"> <img src="images/ctree_shields_6p.png" width="430">
+<img src="images/ctree_shields_7p.png" width="430">
 
 A maior parte dos jogadores vencedores costuma terminar o jogo com
 uma boa quantidade de escudos; tipicamente um número maior de 5 e 
@@ -16,18 +16,18 @@ com os achados na associação, os quais afirmam que investimentos militares
 auxiliam o jogador a vencer.
 
 ### 2. Quantidade de bens manufaturados
-<img src="images/ctree_manuf_goods_3p.png" width="400"> <img src="images/ctree_manuf_goods_4p.png" width="400">
-<img src="images/ctree_manuf_goods_5p.png" width="400"> <img src="images/ctree_manuf_goods_6p.png" width="400">
-<img src="images/ctree_manuf_goods_7p.png" width="400">
+<img src="images/ctree_manuf_goods_3p.png" width="430"> <img src="images/ctree_manuf_goods_4p.png" width="430">
+<img src="images/ctree_manuf_goods_5p.png" width="430"> <img src="images/ctree_manuf_goods_6p.png" width="430">
+<img src="images/ctree_manuf_goods_7p.png" width="430">
 
 Cartas de bens manufaturados não são tão importantes para jogadores vencedores.
 Tipicamente, o vencedor termina tipicamente com 1 bem manufaturado, o que 
 vai ao encontro das estatísticas encontradas.
 
 ### 3. Quantidade de cartas descartadas
-<img src="images/ctree_cards_discarded_3p.png" width="420"> <img src="images/ctree_cards_discarded_4p.png" width="420">
-<img src="images/ctree_cards_discarded_5p.png" width="420"> <img src="images/ctree_cards_discarded_6p.png" width="420">
-<img src="images/ctree_cards_discarded_7p.png" width="420">
+<img src="images/ctree_cards_discarded_3p.png" width="430"> <img src="images/ctree_cards_discarded_4p.png" width="430">
+<img src="images/ctree_cards_discarded_5p.png" width="430"> <img src="images/ctree_cards_discarded_6p.png" width="430">
+<img src="images/ctree_cards_discarded_7p.png" width="430">
 
 Jogadores vencedores não descartam cartas em troca de moedas, o que também
 vai ao encontro das estatísticas encontradas. Quando há descarte, tipicamente
