@@ -2,7 +2,7 @@
 ## Resultados da classificação x Regras de associação/Estatísticas
 
 ### 1. Quantidade de escudos
-![](images/ctree_shields_3p.png | width=400)
+![](images/ctree_shields_3p.png =400x400)
 ![](images/ctree_shields_4p.png)
 ![](images/ctree_shields_5p.png)
 ![](images/ctree_shields_6p.png)
