@@ -5,6 +5,8 @@ data <- read.csv('7wonders_5.csv')
 data <- read.csv('7wonders_6.csv')
 data <- read.csv('7Wonders_7.csv')
 
+library(ggplot2)
+
 #REGRESSÃO LINEAR SIMPLES
 # coins spent on commerce x vp total
 cor(data$Coins.spent.on.commerce, data$VP.total, use = 'complete.obs')
@@ -12,8 +14,6 @@ ggplot(data, aes(x = Coins.spent.on.commerce, y = VP.total)) + geom_point()
 model <- lm(data = data, formula = VP.total ~ Commercial.Structures)
 summary(model)
 ggplot(data, aes(x = Coins.spent.on.commerce, y = VP.total)) + geom_point() + geom_smooth(method = lm, see = FALSE)
-
-
 
 # Scientific Structures x vp total
 cor(data$Scientific.Structures, data$VP.total, use = "complete.obs")
