@@ -37,12 +37,11 @@ def main():
     wait.until(EC.presence_of_element_located((By.ID, 'username_input'))).send_keys(USERNAME)
     wait.until(EC.presence_of_element_located((By.ID, 'password_input'))).send_keys(PASSWORD)
     wait.until(EC.element_to_be_clickable((By.ID, 'login_button'))).click()
-
+    time.sleep(5)
+    
     # Go to the rank page and search for the player id that will be caught in the matches.
     RANKING_URL = 'https://boardgamearena.com/gamepanel?game=sevenwonders&section=rankings'
     browser.get(RANKING_URL)
-    browser.get(RANKING_URL)
-    browser.refresh()
 
     if USER_ID == 0:
         top_players = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@class="gameranking"]'))).find_elements_by_class_name('flag')
@@ -142,4 +141,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
