@@ -7,8 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 # Premium account
-USERNAME = 'username'
-PASSWORD = 'password'
+USERNAME = 'Mineradores'
+PASSWORD = ''
 
 # player rank (top 10)
 RANK = 1
@@ -18,11 +18,11 @@ USER_ID = 0
 PLAYERS_AVERAGE_LEVEL_MIN = 350
 # amount of matches to be taken according to number of players
 PLAYERS = {
-    3 : 500,
-    4 : 500,
-    5 : 500,
-    6 : 500,
-    7 : 500
+    3 : 1000,
+    4 : 1000,
+    5 : 1000,
+    6 : 1000,
+    7 : 1000
 }
 # download: https://sites.google.com/a/chromium.org/chromedriver/downloads
 WEBDRIVER_PATH = 'C:\\Users\\rvales\\Downloads\\chromedriver_win32\\chromedriver.exe'
@@ -80,7 +80,7 @@ def main():
     # For each match, go to page and...
     print('Acessing ' + str(total) + ' matches:')
 
-    for i in range(375, total):
+    for i in range(total):
         browser.get('https://boardgamearena.com/table?table=' + games_id[i])
 
         # Check if you need this number of players
@@ -91,7 +91,7 @@ def main():
             continue
 
         # Checks if the players' level is above the minimum
-        game_stats = wait.until(EC.presence_of_element_located((By.ID, 'table_stats')))
+        #game_stats = wait.until(EC.presence_of_element_located((By.ID, 'table_stats')))
         average_level = int(wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="table_stats"]/*/*/*/*[@class="gamerank_value"]'))).text)
         if average_level < PLAYERS_AVERAGE_LEVEL_MIN:
             print('[' + str(i+1) + '/' + str(total) + '] Match #' + games_id[i] + ' ignored. Average player level: ' + str(average_level) + ' (min ' + str(PLAYERS_AVERAGE_LEVEL_MIN) + ')')
@@ -111,7 +111,7 @@ def main():
             v = table_rows[j].find_elements_by_xpath('td')
             # Add the data of each player in the list
             data[j-1].append('')
-            for k in range(0, number_players):
+            for k in range(number_players):
                 data[j-1].append(v[k].text)
 
         # Write to file...
@@ -119,7 +119,7 @@ def main():
 
         ff = open(FILE_NAME, 'a')
         # y = each player of each match
-        for y in range(0, len(data[0])):
+        for y in range(len(data[0])):
             # x = each stat (game result, thinking time, vp from.., ...)
             for x in range(0, 25):
                 ff.write(data[x][y])
@@ -142,3 +142,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
