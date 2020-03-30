@@ -6,16 +6,14 @@ library(rpart.plot)
 #filenames <- list.files(path = "../datasets", pattern = "*.csv", full.names=TRUE)
 #df <- na.omit(do.call(rbind, lapply(filenames, read.csv)))
 
-df3 <- na.omit(read.csv("../datasets/7wonders_3.csv"))
-df4 <- na.omit(read.csv("../datasets/7wonders_4.csv"))
-df5 <- na.omit(read.csv("../datasets/7wonders_5.csv"))
-df6 <- na.omit(read.csv("../datasets/7wonders_6.csv"))
-df7 <- na.omit(read.csv("../datasets/7wonders_7.csv"))
+df3 <- na.omit(read.csv("../datasets/mar_20/7wonders_3.csv"))
+df4 <- na.omit(read.csv("../datasets/mar_20/7wonders_4.csv"))
+df5 <- na.omit(read.csv("../datasets/mar_20/7wonders_5.csv"))
+df6 <- na.omit(read.csv("../datasets/mar_20/7wonders_6.csv"))
+df7 <- na.omit(read.csv("../datasets/mar_20/7wonders_7.csv"))
 
 # The data has a certain order (placement), so we'll need to "shuffle" the dataframes
 # so it'll be representative of the actual population.
-# (thankfully the result didn't change for the images as of 2019-11-05; 
-# however, it's good practice)
 set.seed(123)
 
 createTrainTest <- function(data, size = 0.8, train = TRUE) {
@@ -61,11 +59,11 @@ fitPlot <- function(df, df_test, y, x, label) {
 }
 
 # PLACE ~ SHIELDS 
-#fitPlot(df3, df3_test, df3$Place, df3$Shields, "Classification by x = Shield count: 3 players")
-#fitPlot(df4, df4_test, df4$Place, df4$Shields, "Classification by x = Shield count: 4 players")
-#fitPlot(df5, df5_test, df5$Place, df5$Shields, "Classification by x = Shield count: 5 players")
-#fitPlot(df6, df6_test, df6$Place, df6$Shields, "Classification by x = Shield count: 6 players")
-#fitPlot(df7, df7_test, df7$Place, df7$Shields, "Classification by x = Shield count: 7 players")
+fitPlot(df3, df3_test, df3$Place, df3$Shields, "Classification by x = Shield count: 3 players")
+fitPlot(df4, df4_test, df4$Place, df4$Shields, "Classification by x = Shield count: 4 players")
+fitPlot(df5, df5_test, df5$Place, df5$Shields, "Classification by x = Shield count: 5 players")
+fitPlot(df6, df6_test, df6$Place, df6$Shields, "Classification by x = Shield count: 6 players")
+fitPlot(df7, df7_test, df7$Place, df7$Shields, "Classification by x = Shield count: 7 players")
 # Conclusion:
 # Players with lots of shields (but not excessively so (> 9)) tend to score better,
 # proving that an agressive playstyle may be worth the investment.
