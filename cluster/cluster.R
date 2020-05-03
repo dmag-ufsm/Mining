@@ -1,31 +1,44 @@
-# Cluster
-# Algorithm - Kmeans 
-setwd('../Documents/Projetos/Mining/')
+# Session -> Set Working Directiory -> To Source File Location
 
-# read data from matches with 3 players
-data_3players <- na.omit(read.csv('./datasets/7wonders_3.csv'))
+# Clustering
+# Algorithm - K-means 
+# Objective: separate player playstyles.
 
-# read data from matches with 4 players
-data_4players <- na.omit(read.csv('./datasets/7wonders_4.csv'))
+# Rules to make K-means work correctly:
+# -------------------------------------
+# 1) Rows must be observations and columns variables;
+# 2) NAs must be removed;
+# 3) Data must be scaled to make variables comparable.
 
-# read data from matches with 5 players 
-data_5players <- na.omit(read.csv('./datasets/7wonders_5.csv'))
+library(cluster)
+library(factoextra)
 
-# read data from matches with 6 players
-data_6players <- na.omit(read.csv('./datasets/7wonders_6.csv'))
+set.seed(123)
 
-# read data from matches with 7 players
-data_7players <- na.omit(read.csv('./datasets/7wonders_7.csv'))
+df3 <- na.omit(read.csv("../datasets/mar_20/7wonders_3.csv"))
 
-# place x vp total 
-cluster <- kmeans(data_3players[, c(1, 2)], 3)
-plot(data_3players[, c(1, 2)], col = cluster$cluster, pch = 20, cex = 1)
-points(cluster$centers, pch = 4, cex = 4, lwd = 4)
+df3_winners <- df3[df3$Place == 1, ]
+df3_vps <- df3_winners[, c("VP.from.Civilian.Structures", "VP.from.Commercial.Structures", 
+           "VP.from.Guilds", "VP.from.Military.Conflicts..Victory.",
+           "VP.from.Military.Conflicts..Defeat.", "VP.from.Scientific.Structures", 
+           "VP.from.Treasury.Contents", "VP.from.Wonder")]
 
+df3_vps_scaled <- scale(df3_vps)
 
-cluster <- kmeans(data_3players[, c(17, 15)], 8)
-plot(data_3players[, c(17, 15)], col = cluster$cluster, pch = 20, cex = 1)
-points(cluster$centers, pch = 4, cex = 4, lwd = 4)
+# Finding the optimal optimal number of clusters.
+# Elbow method found k = 3 or 4
+fviz_nbclust(df3_vps_scaled, kmeans, method = "wss") +
+  labs(subtitle = "Elbow method")
 
-# tentativa usando clusters 
-# por enquanto nenhum resultado interessante
+# Silhouette found k = 2
+fviz_nbclust(df3_vps_scaled, kmeans, method = "silhouette")+
+  labs(subtitle = "Silhouette method")
+
+# Gap statistics found k = 10 and it's too slow; not suitable for this dataset
+#fviz_nbclust(df3_vps_scaled, kmeans, nstart = 25,  method = "gap_stat", nboot = 50)+
+#  labs(subtitle = "Gap statistic method")
+
+df3_kmeans <- kmeans(df3_vps_scaled, 3)
+clusters <- df3_kmeans$cluster
+cluster_list <- cbind(df3_vps, clusters)
+fviz_cluster(df3_kmeans, data=df3_vps)
