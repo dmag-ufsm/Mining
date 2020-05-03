@@ -4,6 +4,8 @@
 # Algorithm - K-means 
 # Objective: separate player playstyles.
 
+# Great reference: https://uc-r.github.io/kmeans_clustering
+
 # Rules to make K-means work correctly:
 # -------------------------------------
 # 1) Rows must be observations and columns variables;
@@ -12,6 +14,7 @@
 
 library(cluster)
 library(factoextra)
+library(dplyr)
 
 set.seed(123)
 
@@ -39,6 +42,28 @@ fviz_nbclust(df3_vps_scaled, kmeans, method = "silhouette")+
 #  labs(subtitle = "Gap statistic method")
 
 df3_kmeans <- kmeans(df3_vps_scaled, 3)
+#df3_pam <- pam(df3_vps_scaled, 3) # PAM wields similar but worse results. 
 clusters <- df3_kmeans$cluster
 cluster_list <- cbind(df3_vps, clusters)
-fviz_cluster(df3_kmeans, data=df3_vps)
+fviz_cluster(df3_kmeans, data=df3_vps, geom=c("point"))
+
+# TODO
+# Customize the plot above;
+# Show a new plot combining the clusters and how much the VPs influence them.
+
+# Counts contribution in % of each VP to each cluster.
+cluster_table <- df3_vps %>%
+  mutate(Cluster = clusters) %>%
+  group_by(Cluster) %>%
+  summarise_all("mean")
+
+# In general, each Cluster can be defined as it follows:
+# Cluster 1) Military with some balanced play.
+# Cluster 2) Purely scientific.
+# Cluster 3) Military focus.
+#
+# It's clear to see that while the Military stategy is the go-to for most 1st place players,
+# it still needs to be complemented by some other type of VP: mostly provided by Civilian
+# structures, Guilds and sometimes Treasury.
+# The mad scientist, on the other hand, relies only on Science VPs, as they provide more
+# points alone than any other type of VP.
