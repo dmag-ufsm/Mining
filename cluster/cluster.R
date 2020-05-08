@@ -57,7 +57,6 @@ cluster_table <- df3_vps %>%
   summarise_all("mean")
 cluster_table <- select(cluster_table, -1)
 
-
 # Plotting stuff.
 vps <- c("VP Civil", "VP Commerce", "VP Guilds", "VP Military", "VP Science", "VP Treasury", "VP Wonder")
 col <- c("orange",   "yellow",      "green",     "red",         "blue",       "purple",      "pink")
@@ -70,8 +69,8 @@ barplot(t(cluster_table), beside = TRUE, ylim = c(0, 50), names.arg=c("Cluster 1
 # > Purely scientific.
 # > Military focus.
 #
-# Arguably, "Military" focus and "Military with some balanced play" can be considered as a single cluster, 
-# because the differences are very sutile. This is the case for n_clusters = 2.
+# Arguably, "Military focus" and "Military with some balanced play" can be considered as a single cluster, 
+# because the differences are very subtle. This is the case for n_clusters = 2.
 #
 # It's clear to see that while the Military stategy is the go-to for most 1st place players,
 # it still needs to be complemented by some other type of VP: mostly provided by Civilian
