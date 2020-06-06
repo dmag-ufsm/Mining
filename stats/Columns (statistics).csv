@@ -1,4 +1,4 @@
-coluna,minimo,maximo,media,desvio padrao,varianca,1 quartil,mediana,3 quartil
+column,min,max,mean,pstdev,pvariance,1 quartile,median,3 quartile
 Place,1,3,1.9983,0.8166,0.6669,1,2,3
 VP total,26,90,53.8291,7.3555,54.1043,49,54,59
 Thinking time,98,983,253.0320,75.1181,5642.7338,200,241,291
