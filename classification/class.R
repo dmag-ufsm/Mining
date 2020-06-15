@@ -3,9 +3,7 @@ library(rpart.plot)
 
 # Session -> Set Working Directiory -> To Source File Location
 
-#filenames <- list.files(path = "../datasets", pattern = "*.csv", full.names=TRUE)
-#df <- na.omit(do.call(rbind, lapply(filenames, read.csv)))
-
+#df3 <- na.omit(read.csv("../datasets/oct_19/7wonders_3.csv"))
 df3 <- na.omit(read.csv("../datasets/mar_20/7wonders_3.csv"))
 df4 <- na.omit(read.csv("../datasets/mar_20/7wonders_4.csv"))
 df5 <- na.omit(read.csv("../datasets/mar_20/7wonders_5.csv"))
@@ -110,75 +108,48 @@ fitPlot(df7, df7_test, df7$Place, df7$Shields, "Classification by x = Shield cou
 #fitPlot(df7, df7_test, df7$Place, df7$Manufactured.Goods, "Classification by x = Manufactured Goods: 7 players")
 
 
-fitPlotVP <- function(df, df_test, y, wonder, conflict.victory, civil, comm, guild, sci, treasury, label) {
-  fit <- rpart(y ~ wonder+conflict.victory+civil+comm+guild+sci+treasury, method="class", data=df)
-  rpart.plot(fit, main=label, branch.lty=3, shadow.col="gray")
-  df_predict <- predict(fit, df_test, type="class")
-  table(df$Place, df_predict)
+fitPlotVP <- function(df, df_test, label) {
+  names(df)[names(df) == "VP.from.Wonder"] <- "wonder"
+  names(df)[names(df) == "VP.from.Military.Conflicts..Victory."] <- "military.victory"
+  names(df)[names(df) == "VP.from.Civilian.Structures"] <- "civil"
+  names(df)[names(df) == "VP.from.Commercial.Structures"] <- "commerce"
+  names(df)[names(df) == "VP.from.Guilds"] <- "guild"
+  names(df)[names(df) == "VP.from.Scientific.Structures"] <- "sci"
+  names(df)[names(df) == "VP.from.Treasury.Contents"] <- "treasury"
+  names(df_test)[names(df_test) == "VP.from.Wonder"] <- "wonder"
+  names(df_test)[names(df_test) == "VP.from.Military.Conflicts..Victory."] <- "military.victory"
+  names(df_test)[names(df_test) == "VP.from.Civilian.Structures"] <- "civil"
+  names(df_test)[names(df_test) == "VP.from.Commercial.Structures"] <- "commerce"
+  names(df_test)[names(df_test) == "VP.from.Guilds"] <- "guild"
+  names(df_test)[names(df_test) == "VP.from.Scientific.Structures"] <- "sci"
+  names(df_test)[names(df_test) == "VP.from.Treasury.Contents"] <- "treasury"
+  
+  fit <- rpart(Place ~ wonder+military.victory+civil+commerce+guild+sci+treasury, method="class", data=df, cp=0.005)
+  rpart.plot(fit, main=label, branch.lty=3)
+  df_predict <- predict(fit, newdata = df_test, type="class")
+  table(df_test$Place, df_predict)
 }
-
 
 # PLACE ~ COMBINED VPs
 fitPlotVP(df3,
           df3_test,
-          df3$Place, 
-          df3$VP.from.Wonder,
-          df3$VP.from.Military.Conflicts..Victory,
-          df3$VP.from.Civilian.Structures,
-          df3$VP.from.Commercial.Structures,
-          df3$VP.from.Guilds,
-          df3$VP.from.Scientific.Structures,
-          df3$VP.from.Treasury.Contents,
           "Classification based on y = Place, x = combined VPs (3 PLAYERS)")
 
 fitPlotVP(df4,
           df4_test,
-          df4$Place, 
-          df4$VP.from.Wonder,
-          df4$VP.from.Military.Conflicts..Victory,
-          df4$VP.from.Civilian.Structures,
-          df4$VP.from.Commercial.Structures,
-          df4$VP.from.Guilds,
-          df4$VP.from.Scientific.Structures,
-          df4$VP.from.Treasury.Contents,
           "Classification based on y = Place, x = combined VPs (4 PLAYERS)")
 
 fitPlotVP(df5,
           df5_test,
-          df5$Place, 
-          df5$VP.from.Wonder,
-          df5$VP.from.Military.Conflicts..Victory,
-          df5$VP.from.Civilian.Structures,
-          df5$VP.from.Commercial.Structures,
-          df5$VP.from.Guilds,
-          df5$VP.from.Scientific.Structures,
-          df5$VP.from.Treasury.Contents,
           "Classification based on y = Place, x = combined VPs (5 PLAYERS)")
 
 fitPlotVP(df6,
           df6_test,
-          df6$Place, 
-          df6$VP.from.Wonder,
-          df6$VP.from.Military.Conflicts..Victory,
-          df6$VP.from.Civilian.Structures,
-          df6$VP.from.Commercial.Structures,
-          df6$VP.from.Guilds,
-          df6$VP.from.Scientific.Structures,
-          df6$VP.from.Treasury.Contents,
           "Classification based on y = Place, x = combined VPs (6 PLAYERS)")
 
 fitPlotVP(df7,
           df7_test,
-          df7$Place, 
-          df7$VP.from.Wonder,
-          df7$VP.from.Military.Conflicts..Victory,
-          df7$VP.from.Civilian.Structures,
-          df7$VP.from.Commercial.Structures,
-          df7$VP.from.Guilds,
-          df7$VP.from.Scientific.Structures,
-          df7$VP.from.Treasury.Contents,
           "Classification based on y = Place, x = combined VPs (7 PLAYERS)")
-
 
 
 # Continue with other classifications and see which results are interesting.
